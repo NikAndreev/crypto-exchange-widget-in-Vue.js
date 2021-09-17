@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>Crypto Exchange</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/template.min.css">
+	<link rel="icon" href="assets/img/icon-swap.svg" type="image/x-icon">
+</head>
+<body>
+<div class="wrapper">
+
+	<div class="container">
+
+		<!-- WIDGET :: START -->
+		<section class="widget" id="widget" v-cloak>
+			<div class="widget__inner" @click="closeDropdown">
+				<h1 class="widget__title">
+					Crypto Exchange
+				</h1>
+				<div class="widget__text">
+					Exchange fast and easy
+				</div>
+				<div class="currency-group widget__currency-group">
+					<div class="currency-group__currency currency">
+						<div class="currency__inner input">
+							<div class="currency__input">
+								<input 
+									type="number" 
+									min="0"
+									step="0.00000001"
+									v-model="from.currentAmount"
+								>
+							</div>
+							<div 
+								class="currency__btn" 
+								role="button" 
+								:style="{backgroundImage: 'url(' + from.currencyImage + ')'}"
+								@click="tabIndex = 1"
+							>
+								{{ from.currency }}
+							</div>
+						</div>
+						<div 
+							class="currency__dropdown"
+							:class="{ active: isDropdownFromActive }"
+						>
+							<div class="currency__dropdown-header">
+								<input 
+									type="text" 
+									class="input currency__dropdown-input" 
+									placeholder="Search"
+									v-model="from.search"
+								>
+								<span class="currency__dropdown-close" 
+									role="button"
+									@click="tabIndex = 0">
+								</span>
+							</div>
+							<div class="currency__dropdown-body">
+								<ul 
+									class="currency__dropdown-list"
+									data-from="true"
+									@click="currencyListClickHandler"
+								>
+									<li 
+										v-for="currency in availableCurrenciesListFrom" 
+										class="currency__dropdown-list-item"
+										:key="currency.ticker"
+										:data-ticker="currency.ticker" 
+										:data-image="currency.image"
+										:style="{backgroundImage: 'url(' + currency.image + ')'}"
+									>
+										<span class="currency__dropdown-list-item-ticker">
+											{{ currency.ticker }}
+										</span>
+										<span class="currency__dropdown-list-item-name">
+											{{ currency.name }}
+										</span>
+									</li> 
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="currency-group__swap"></div>
+					<div class="currency-group__currency currency">
+						<div class="currency__inner input">
+							<div class="currency__input">
+								<input 
+									type="text" 
+									v-model="to.estimatedAmount"
+									readonly
+								>
+							</div>
+							<div
+								class="currency__btn" 
+								role="button"
+								:style="{backgroundImage: 'url(' + to.currencyImage + ')'}"
+								@click="tabIndex = 2"
+							>
+								{{ to.currency }}
+							</div>
+						</div>
+						<div 
+							class="currency__dropdown"
+							:class="{ active: isDropdownToActive }"
+						>
+							<div class="currency__dropdown-header">
+								<input 
+									type="text" 
+									class="input currency__dropdown-input" 
+									placeholder="Search"
+									v-model="to.search"
+								>
+								<span class="currency__dropdown-close" 
+									role="button"
+									@click="tabIndex = 0">
+								</span>
+							</div>
+							<div class="currency__dropdown-body">
+								<ul 
+									class="currency__dropdown-list"
+									data-to="true"
+									@click="currencyListClickHandler"
+								>
+									<li 
+										v-for="currency in availableCurrenciesListTo" 
+										class="currency__dropdown-list-item" 
+										:key="currency.ticker"
+										:data-ticker="currency.ticker" 
+										:data-image="currency.image"
+										:style="{backgroundImage: 'url(' + currency.image + ')'}"
+									>
+										<span class="currency__dropdown-list-item-ticker">
+											{{ currency.ticker }}
+										</span>
+										<span class="currency__dropdown-list-item-name">
+											{{ currency.name }}
+										</span>
+									</li> 
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="address">
+					<div class="address__label">
+						Your Ethereum address
+					</div>
+					<div class="address__row">
+						<div class="address__input">
+							<input type="text" class="input">
+						</div>
+						<div class="address__btn">
+							<button 
+								class="btn btn_color_blue"
+								:disabled="error.isError"
+							>
+								Exchange
+							</button>
+							<div 
+								class="address__btn-error"
+								:class="{ active: error.isError }"
+							>
+								{{ error.errorText }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- WIDGET :: END -->
+
+	</div>
+
+</div>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>
