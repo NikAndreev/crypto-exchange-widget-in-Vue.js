@@ -103,6 +103,7 @@ window.addEventListener("load", function(event) {
 										if ( this.from.minAmount != minimalExchangeAmountValue ) {
 											this.from.minAmount = minimalExchangeAmountValue
 										} else {
+											this.from.currentAmount = minimalExchangeAmountValue
 											this.getEstimatedExchangeAmount()
 										}
 
