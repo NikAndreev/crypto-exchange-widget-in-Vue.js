@@ -7,8 +7,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/template.min.css">
-	<link rel="icon" href="assets/img/icon-swap.svg" type="image/x-icon">
+	<link rel="stylesheet" href="dist/css/template.min.css">
+	<link rel="icon" href="dist/img/icon-swap.svg" type="image/x-icon">
 </head>
 <body>
 <div class="wrapper">
@@ -63,7 +63,7 @@
 							<div class="currency__dropdown-body">
 								<ul 
 									class="currency__dropdown-list"
-									data-from="true"
+									data-direction="from"
 									@click="currencyListClickHandler"
 								>
 									<li 
@@ -123,7 +123,7 @@
 							<div class="currency__dropdown-body">
 								<ul 
 									class="currency__dropdown-list"
-									data-to="true"
+									data-direction="to"
 									@click="currencyListClickHandler"
 								>
 									<li 
@@ -177,7 +177,7 @@
 	</div>
 
 </div>
-<script src="https://unpkg.com/vue@next"></script>
-<script src="assets/js/template.js"></script>
+<script src="dist/vendor/vue.global.prod.js"></script>
+<script src="dist/js/template.min.js"></script>
 </body>
 </html>
